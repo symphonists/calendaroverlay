@@ -1,0 +1,63 @@
+.calendar-overlay {
+	background: #464645;
+	color: #ffffff;
+	margin: -1.60em 0 1.75em 0;
+	overflow: hidden;
+	padding: 1.75em 1.75em 0 1.75em;
+}
+
+.calendar-overlay .date-table {
+	float: left;
+	margin: 0 0 1.75em 0;
+	width: 20em;
+}
+.calendar-overlay .date-table table {
+	border-spacing: 0;
+	width: 20em;
+}
+.calendar-overlay .date-table table thead td {
+	border-bottom: 1px solid #5b5a59;
+	padding: 0 0 2px 0;
+	text-align: center;
+	width: 1%;
+}
+.calendar-overlay .date-table table tbody td {
+	border: 1px solid #5b5a59;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+	width: 1%;
+}
+.calendar-overlay .date-table table tbody td:first-child {
+	border-left: 1px solid #5b5a59;
+}
+.calendar-overlay .date-table table tbody td.last-month,
+.calendar-overlay .date-table table tbody td.next-month {
+	color: #747a77;
+}
+.calendar-overlay .date-table table tbody td.odd {
+	background: #434341;
+}
+.calendar-overlay .date-table table tbody td.even {
+	background: #4a4a48;
+}
+.calendar-overlay .date-table table tbody td span {
+	background: rgba(0, 0, 0, 0);
+	display: block;
+	padding: 0.5em;
+}
+.calendar-overlay .date-table table tbody td.today span {
+	background: rgba(0, 0, 0, 0.2);
+}
+.calendar-overlay .date-table table tbody td span:hover {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.calendar-overlay .date-select,
+.calendar-overlay .date-input {
+	margin: 0 0 1.75em 22em;
+	min-width: 5em;
+}
+.calendar-overlay .date-input {
+	padding-right: 10px;
+}
