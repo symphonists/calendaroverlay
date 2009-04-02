@@ -34,7 +34,7 @@
 				date_cal_body.find('td').each(function() {
 					var date_cal_item = $(this);
 					
-					date_cal_item.find('span').text(working.toString('d '));
+					date_cal_item.find('a').text(working.toString('d '));
 					date_cal_item
 						.removeClass('last-month')
 						.removeClass('next-month')
@@ -77,7 +77,7 @@
 						
 						current.set({ day: parseInt(self.text()) });
 						
-						update();
+						update(); return false;
 					});
 					
 					working.next().day();
@@ -183,7 +183,7 @@
 					var days = 0;
 					
 					while (days++ < 7) {
-						var date_cal_item = $('<td><span>#</span></td>');
+						var date_cal_item = $('<td><a href="#">#</a></td>');
 						
 						if (days % 2) {
 							date_cal_item.addClass('odd');
