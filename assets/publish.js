@@ -43,6 +43,20 @@
 					
 					// Choose class:
 					if (
+						parseInt(working.toString('yyyy'))
+						< parseInt(current.toString('yyyy'))
+					) {
+						date_cal_item
+							.addClass('last-month');
+						
+					} else if (
+						parseInt(working.toString('yyyy'))
+						> parseInt(current.toString('yyyy'))
+					) {
+						date_cal_item
+							.addClass('next-month');
+						
+					} else if (
 						parseInt(working.toString('M'))
 						< parseInt(current.toString('M'))
 					) {
