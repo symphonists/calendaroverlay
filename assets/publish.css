@@ -6,58 +6,106 @@
 	padding: 1.75em 1.75em 0 1.75em;
 }
 
-.calendar-overlay .date-table {
+.calendar-overlay .date-cal {
 	float: left;
 	margin: 0 0 1.75em 0;
 	width: 20em;
 }
-.calendar-overlay .date-table table {
+.calendar-overlay .date-cal table {
 	border-spacing: 0;
 	width: 20em;
 }
-.calendar-overlay .date-table table thead td {
-	border-bottom: 1px solid #5b5a59;
+.calendar-overlay .date-cal table thead td {
 	padding: 0 0 2px 0;
 	text-align: center;
 	width: 1%;
 }
-.calendar-overlay .date-table table tbody td {
-	border: 1px solid #5b5a59;
-	border-top: none;
-	border-left: none;
+.calendar-overlay .date-cal table tbody td {
+	color: #ffffff;
+	position: relative;
 	text-align: center;
 	width: 1%;
 }
-.calendar-overlay .date-table table tbody td:first-child {
-	border-left: 1px solid #5b5a59;
+.calendar-overlay .date-cal table tbody td:first-child {
+	border-left: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-table table tbody td.last-month,
-.calendar-overlay .date-table table tbody td.next-month {
-	color: #747a77;
+.calendar-overlay .date-cal table tbody tr:first-child td {
+	border-top: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-table table tbody td.odd {
+.calendar-overlay .date-cal table tbody td:last-child {
+	border-right: 1px solid #6c6b6a;
+}
+.calendar-overlay .date-cal table tbody tr:last-child td {
+	border-bottom: 1px solid #6c6b6a;
+}
+.calendar-overlay .date-cal table tbody td.last-month,
+.calendar-overlay .date-cal table tbody td.next-month {
+	color: #757472;
+}
+.calendar-overlay .date-cal table tbody td.odd {
 	background: #434341;
 }
-.calendar-overlay .date-table table tbody td.even {
+.calendar-overlay .date-cal table tbody td.even {
 	background: #4a4a48;
 }
-.calendar-overlay .date-table table tbody td span {
+.calendar-overlay .date-cal table tbody td span {
 	background: rgba(0, 0, 0, 0);
+	border-bottom: 1px solid #5b5a59;
+	border-right: 1px solid #5b5a59;
 	display: block;
-	padding: 0.5em;
+	padding: 6px;
 }
-.calendar-overlay .date-table table tbody td.today span {
+.calendar-overlay .date-cal table tbody td:last-child span {
+	border-right: none;
+}
+.calendar-overlay .date-cal table tbody tr:last-child td span {
+	border-bottom: none;
+}
+.calendar-overlay .date-cal table tbody td span:hover {
 	background: rgba(0, 0, 0, 0.2);
 }
-.calendar-overlay .date-table table tbody td span:hover {
-	background: rgba(0, 0, 0, 0.2);
+.calendar-overlay .date-cal table tbody td span:hover,
+.calendar-overlay .date-cal table tbody td.today span {
+	background: #7d9845;
+	border: 1px solid #d3ff74 !important;
+	color: #ffffff;
+	left: -1px;
+	margin: 0 -1px -1px 0;
+	position: relative;
+	top: -1px;
+	z-index: 1001;
+}
+.calendar-overlay .date-cal table tbody td span:hover {
+	background: #9a9896;
+	border-color: #dad8d5 !important;
+	z-index: 1000;
+}
+.calendar-overlay .date-cal table tbody td:last-child span:hover,
+.calendar-overlay .date-cal table tbody td.today:last-child span {
+	margin-right: -2px;
+}
+.calendar-overlay .date-cal table tbody tr:last-child td span:hover,
+.calendar-overlay .date-cal table tbody tr:last-child td.today span {
+	margin-bottom: -2px;
 }
 
-.calendar-overlay .date-select,
+.calendar-overlay .date-month,
+.calendar-overlay .date-time,
 .calendar-overlay .date-input {
 	margin: 0 0 1.75em 22em;
 	min-width: 5em;
 }
+
 .calendar-overlay .date-input {
 	padding-right: 10px;
+}
+.calendar-overlay .date-input input {
+	background: #353534;
+	border: 1px solid #6c6b6a;
+	color: #ffffff;
+	padding: 4px;
+}
+.calendar-overlay .date-input input.error {
+	background: #a44242;
+	border-color: #ff6666;
 }

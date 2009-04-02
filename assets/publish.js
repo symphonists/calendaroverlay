@@ -3,13 +3,16 @@
 	$(document).ready(function() {
 		$('.field-date').each(function() {
 			var field = $(this);
-			var date_table = $('<table />');
-			var date_table_head = $('<thead><tr /></thead>');
-			var date_table_body = $('<tbody>');
-			var date_select = $('<select />');
+			var date_cal = $('<table />');
+			var date_cal_head = $('<thead><tr /></thead>');
+			var date_cal_body = $('<tbody>');
+			
+			var date_month = $('<select />');
+			
 			var date_input = field.find('input');
+			
 			var container = field.after('<div />').next();
-			var current = null;
+			var current = null; var editing = false;
 			
 			var update = function() {
 				var working = current.clone();
@@ -28,15 +31,14 @@
 				if (!working.is().sunday()) working.last().sunday();
 				
 				// Update days:
-				date_table_body.find('td').each(function() {
-					var date_table_item = $(this);
+				date_cal_body.find('td').each(function() {
+					var date_cal_item = $(this);
 					
-					date_table_item.find('span').text(working.toString('d '));
-					date_table_item
+					date_cal_item.find('span').text(working.toString('d '));
+					date_cal_item
 						.removeClass('last-month')
 						.removeClass('next-month')
 						.removeClass('this-month')
-						.removeClass('inactive')
 						.removeClass('today');
 					
 					// Choose class:
@@ -44,28 +46,26 @@
 						parseInt(working.toString('M'))
 						< parseInt(current.toString('M'))
 					) {
-						date_table_item
-							.addClass('last-month')
-							.addClass('inactive');
+						date_cal_item
+							.addClass('last-month');
 						
 					} else if (
 						parseInt(working.toString('M'))
 						> parseInt(current.toString('M'))
 					) {
-						date_table_item
-							.addClass('next-month')
-							.addClass('inactive');
+						date_cal_item
+							.addClass('next-month');
 						
 					} else {
-						date_table_item.addClass('this-month');
+						date_cal_item.addClass('this-month');
 						
 						if (working.toString('d') == current.toString('d')) {
-							date_table_item.addClass('today');
+							date_cal_item.addClass('today');
 						}
 					}
 					
-					date_table_item.unbind('click');
-					date_table_item.click(function() {
+					date_cal_item.unbind('click');
+					date_cal_item.click(function() {
 						var self = $(this);
 						
 						if (self.hasClass('last-month')) {
@@ -85,25 +85,25 @@
 				
 				// Populate select:
 				working = current.clone().add(-6).months();
-				date_select.empty(); ticker = 0;
+				date_month.empty(); ticker = 0;
 				
 				while (ticker++ < 13) {
-					var date_select_option = $('<option />');
+					var date_month_option = $('<option />');
 					
-					date_select_option.text(working.toString('MMMM yyyy'));
-					date_select_option.val(working.toString('M yyyy'));
+					date_month_option.text(working.toString('MMMM yyyy'));
+					date_month_option.val(working.toString('M yyyy'));
 					
 					if (ticker == 7) {
-						date_select_option.attr('selected', 'selected');
+						date_month_option.attr('selected', 'selected');
 					}
 					
-					date_select.append(date_select_option);
+					date_month.append(date_month_option);
 					working.next().month();
 				}
 				
 				// Change date select:
-				date_select.unbind('change');
-				date_select.change(function() {
+				date_month.unbind('change');
+				date_month.change(function() {
 					var bits = $(this).val().split(' ');
 					
 					current.set({
@@ -117,12 +117,40 @@
 				// Change date manually:
 				date_input.unbind('change');
 				date_input.change(function() {
-					var next = Date.parse($(this).val());
+					var self = $(this);
+					var next = Date.parse(self.val());
+					
+					editing = false;
 					
 					if (next != null) {
+						self.removeClass('error');
 						current = next.clone();
 						update();
+						
+					} else {
+						self.addClass('error');
 					}
+				});
+				
+				date_input.removeClass('error');
+				date_input.unbind('keyup');
+				date_input.keyup(function(event) {
+					var self = $(this);
+					
+					editing = true;
+					
+					setTimeout(function() {
+						var next = Date.parse(self.val());
+						
+						if (editing) {
+							self.removeClass('error');
+							
+							if (next == null) self.addClass('error');
+						}
+						
+						editing = false;
+						
+					}, 250);
 				});
 			};
 			
@@ -140,9 +168,9 @@
 				
 				// Insert header days:
 				while (ticker++ < 7) {
-					var date_table_item = $('<td>' + working.toString('ddd') + '</td>');
+					var date_cal_item = $('<td>' + working.toString('ddd') + '</td>');
 					
-					date_table_head.find('tr').append(date_table_item);
+					date_cal_head.find('tr').append(date_cal_item);
 					
 					working.next().day();
 				}
@@ -151,23 +179,28 @@
 				ticker = 0;
 				
 				while (ticker++ < 6) {
-					var date_table_row = $('<tr />');
+					var date_cal_row = $('<tr />');
 					var days = 0;
 					
 					while (days++ < 7) {
-						var date_table_item = $('<td><span>#</span></td>');
+						var date_cal_item = $('<td><span>#</span></td>');
 						
 						if (days % 2) {
-							date_table_item.addClass('odd');
+							date_cal_item.addClass('odd');
 							
 						} else {
-							date_table_item.addClass('even');
+							date_cal_item.addClass('even');
 						}
 						
-						date_table_row.append(date_table_item);
-						date_table_body.append(date_table_row);
+						date_cal_row.append(date_cal_item);
+						date_cal_body.append(date_cal_row);
 					}
 				}
+				
+				// Calendar complete:
+				date_cal
+					.append(date_cal_head)
+					.append(date_cal_body);
 			}
 			
 		/*---------------------------------------------------------*/
@@ -178,14 +211,12 @@
 			current = Date.parse(date_input.val());
 			
 			// Container for calendar:
-			container.append('<div class="date-table" />');
-			container.find('.date-table').append(
-				date_table.append(date_table_head).append(date_table_body)
-			);
+			container.append('<div class="date-cal" />');
+			container.find('.date-cal').append(date_cal);
 			
 			// Container for selector:
-			container.append('<label class="date-select">Month</label>');
-			container.find('.date-select').append(date_select);
+			container.append('<label class="date-month">Month</label>');
+			container.find('.date-month').append(date_month);
 			
 			// Move input box:
 			container.append('<label class="date-input">Current Date</label>');
