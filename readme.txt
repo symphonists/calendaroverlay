@@ -1,9 +1,9 @@
 Calendar Overlay
 -------------------------------------------------------------------------------
 
-Version: 1.0.3
+Version: 1.0.4
 Author: Rowan Lewis <rowan@pixelcarnage.com>
-Build Date: 2 April 2009
+Build Date: 14 July 2009
 Requirements: Symphony 2
 
 

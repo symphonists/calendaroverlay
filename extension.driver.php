@@ -32,7 +32,6 @@
 		public function initaliseAdminPageHead($context) {
 			$page = $context['parent']->Page;
 			
-            $page->addScriptToHead(URL . '/extensions/calendaroverlay/assets/jquery.js', 3466701);
             $page->addScriptToHead(URL . '/extensions/calendaroverlay/assets/datejs.core.js', 3466703);
             $page->addScriptToHead(URL . '/extensions/calendaroverlay/assets/publish.js', 3466704);
 			$page->addStylesheetToHead(URL . '/extensions/calendaroverlay/assets/publish.css', 'screen', 3466701);

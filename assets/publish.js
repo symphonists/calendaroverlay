@@ -1,13 +1,13 @@
 /*-----------------------------------------------------------------*/
 	
-	$(document).ready(function() {
-		$('.field-date').each(function() {
-			var field = $(this);
-			var date_cal = $('<table />');
-			var date_cal_head = $('<thead><tr /></thead>');
-			var date_cal_body = $('<tbody>');
+	jQuery(document).ready(function() {
+		jQuery('.field-date').each(function() {
+			var field = jQuery(this);
+			var date_cal = jQuery('<table />');
+			var date_cal_head = jQuery('<thead><tr /></thead>');
+			var date_cal_body = jQuery('<tbody>');
 			
-			var date_month = $('<select />');
+			var date_month = jQuery('<select />');
 			
 			var date_input = field.find('input');
 			
@@ -32,7 +32,7 @@
 				
 				// Update days:
 				date_cal_body.find('td').each(function() {
-					var date_cal_item = $(this);
+					var date_cal_item = jQuery(this);
 					
 					date_cal_item.find('a').text(working.toString('d '));
 					date_cal_item
@@ -80,7 +80,7 @@
 					
 					date_cal_item.unbind('click');
 					date_cal_item.click(function() {
-						var self = $(this);
+						var self = jQuery(this);
 						
 						if (self.hasClass('last-month')) {
 							current.last().month();
@@ -102,7 +102,7 @@
 				date_month.empty(); ticker = 0;
 				
 				while (ticker++ < 13) {
-					var date_month_option = $('<option />');
+					var date_month_option = jQuery('<option />');
 					
 					date_month_option.text(working.toString('MMMM yyyy'));
 					date_month_option.val(working.toString('M yyyy'));
@@ -118,7 +118,7 @@
 				// Change date select:
 				date_month.unbind('change');
 				date_month.change(function() {
-					var bits = $(this).val().split(' ');
+					var bits = jQuery(this).val().split(' ');
 					
 					current.set({
 						month: parseInt(bits[0]) - 1,
@@ -131,7 +131,7 @@
 				// Change date manually:
 				date_input.unbind('change');
 				date_input.change(function() {
-					var self = $(this);
+					var self = jQuery(this);
 					var next = Date.parse(self.val());
 					
 					editing = false;
@@ -149,7 +149,7 @@
 				date_input.removeClass('error');
 				date_input.unbind('keyup');
 				date_input.keyup(function(event) {
-					var self = $(this);
+					var self = jQuery(this);
 					
 					editing = true;
 					
@@ -182,7 +182,7 @@
 				
 				// Insert header days:
 				while (ticker++ < 7) {
-					var date_cal_item = $('<td>' + working.toString('ddd') + '</td>');
+					var date_cal_item = jQuery('<td>' + working.toString('ddd') + '</td>');
 					
 					date_cal_head.find('tr').append(date_cal_item);
 					
@@ -193,11 +193,11 @@
 				ticker = 0;
 				
 				while (ticker++ < 6) {
-					var date_cal_row = $('<tr />');
+					var date_cal_row = jQuery('<tr />');
 					var days = 0;
 					
 					while (days++ < 7) {
-						var date_cal_item = $('<td><a href="#">#</a></td>');
+						var date_cal_item = jQuery('<td><a href="#">#</a></td>');
 						
 						if (days % 2) {
 							date_cal_item.addClass('odd');
@@ -223,6 +223,10 @@
 			
 			// Set current date:
 			current = Date.parse(date_input.val());
+			
+			if (current == null) {
+				current = Date.parse("now");
+			}
 			
 			// Container for calendar:
 			container.append('<div class="date-cal" />');
