@@ -12,14 +12,14 @@
 			var date_input = field.find('input');
 			
 			var container = field.after('<div />').next();
-			var current = null; var editing = false;
+			var current = null, editing = false, empty = false;
 			
 			var update = function() {
 				var working = current.clone();
 				var ticker = 0;
 				
 				// Update date input:
-				date_input.val(
+				if (!empty) date_input.val(
 					current.toString('dd MMMM yyyy hh:mm ')
 					+ current.toString('tt').toLowerCase()
 				);
@@ -42,35 +42,23 @@
 						.removeClass('today');
 					
 					// Choose class:
-					if (
-						parseInt(working.toString('yyyy'))
-						< parseInt(current.toString('yyyy'))
-					) {
-						date_cal_item
-							.addClass('last-month');
-						
-					} else if (
-						parseInt(working.toString('yyyy'))
-						> parseInt(current.toString('yyyy'))
-					) {
-						date_cal_item
-							.addClass('next-month');
-						
-					} else if (
-						parseInt(working.toString('M'))
-						< parseInt(current.toString('M'))
-					) {
-						date_cal_item
-							.addClass('last-month');
-						
-					} else if (
-						parseInt(working.toString('M'))
-						> parseInt(current.toString('M'))
-					) {
-						date_cal_item
-							.addClass('next-month');
-						
-					} else {
+					if (parseInt(working.toString('yyyy')) < parseInt(current.toString('yyyy'))) {
+						date_cal_item.addClass('last-month');
+					}
+					
+					else if (parseInt(working.toString('yyyy')) > parseInt(current.toString('yyyy'))) {
+						date_cal_item.addClass('next-month');
+					}
+					
+					else if (parseInt(working.toString('M')) < parseInt(current.toString('M'))) {
+						date_cal_item.addClass('last-month');
+					}
+					
+					else if (parseInt(working.toString('M')) > parseInt(current.toString('M'))) {
+						date_cal_item.addClass('next-month');
+					}
+					
+					else {
 						date_cal_item.addClass('this-month');
 						
 						if (working.toString('d') == current.toString('d')) {
@@ -84,13 +72,15 @@
 						
 						if (self.hasClass('last-month')) {
 							current.last().month();
-							
-						} else if (self.hasClass('next-month')) {
+						}
+						
+						else if (self.hasClass('next-month')) {
 							current.next().month();
 						}
 						
 						current.set({ day: parseInt(self.text()) });
 						
+						empty = false;
 						update(); return false;
 					});
 					
@@ -125,6 +115,7 @@
 						year: parseInt(bits[1])
 					});
 					
+					empty = false;
 					update();
 				});
 				
@@ -134,14 +125,16 @@
 					var self = jQuery(this);
 					var next = Date.parse(self.val());
 					
+					empty = !self.val();
 					editing = false;
 					
 					if (next != null) {
 						self.removeClass('error');
 						current = next.clone();
 						update();
-						
-					} else {
+					}
+					
+					else if (!empty) {
 						self.addClass('error');
 					}
 				});
@@ -151,6 +144,7 @@
 				date_input.keyup(function(event) {
 					var self = jQuery(this);
 					
+					empty = !self.val();
 					editing = true;
 					
 					setTimeout(function() {
@@ -159,7 +153,7 @@
 						if (editing) {
 							self.removeClass('error');
 							
-							if (next == null) self.addClass('error');
+							if (next == null && !empty) self.addClass('error');
 						}
 						
 						editing = false;
@@ -201,8 +195,9 @@
 						
 						if (days % 2) {
 							date_cal_item.addClass('odd');
-							
-						} else {
+						}
+						
+						else {
 							date_cal_item.addClass('even');
 						}
 						
@@ -226,6 +221,7 @@
 			
 			if (current == null) {
 				current = Date.parse("now");
+				empty = true;
 			}
 			
 			// Container for calendar:

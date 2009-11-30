@@ -8,8 +8,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Calendar Overlay',
-				'version'		=> '1.0.3',
-				'release-date'	=> '2009-04-02',
+				'version'		=> '1.0.5',
+				'release-date'	=> '2009-11-30',
 				'author'		=> array(
 					'name'			=> 'Rowan Lewis',
 					'website'		=> 'http://pixelcarnage.com/',
