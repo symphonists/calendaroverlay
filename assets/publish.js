@@ -11,7 +11,7 @@
 			
 			var date_input = field.find('input');
 			
-			var container = field.after('<div />').next();
+			var container = jQuery('<div />').appendTo(field);
 			var current = null, editing = false, empty = false;
 			
 			var update = function() {
