@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------*/
 	
 	jQuery(document).ready(function() {
-		jQuery('.field-date').each(function() {
+		jQuery('div.field-date:not(.instance)').each(function() {
 			var field = jQuery(this);
 			var date_cal = jQuery('<table />');
 			var date_cal_head = jQuery('<thead><tr /></thead>');
@@ -11,7 +11,14 @@
 			
 			var date_input = field.find('input');
 			
-			var container = jQuery('<div />').appendTo(field);
+			var container = jQuery('<div />')
+				.appendTo(field);
+			var inner = jQuery('<div />')
+				.addClass('date-inner')
+				.appendTo(container);
+			var inputs = jQuery('<div />')
+				.addClass('date-inputs')
+				.appendTo(inner);
 			var current = null, editing = false, empty = false;
 			
 			var update = function() {
@@ -224,17 +231,17 @@
 				empty = true;
 			}
 			
-			// Container for calendar:
-			container.append('<div class="date-cal" />');
-			container.find('.date-cal').append(date_cal);
-			
 			// Container for selector:
-			container.append('<label class="date-month">Month</label>');
-			container.find('.date-month').append(date_month);
+			inputs.append('<label class="date-month">Month</label>');
+			inputs.find('.date-month').append(date_month);
 			
 			// Move input box:
-			container.append('<label class="date-input">Current Date</label>');
-			container.find('.date-input').append(date_input);
+			inputs.append('<label class="date-input">Current Date</label>');
+			inputs.find('.date-input').append(date_input);
+			
+			// Container for calendar:
+			inner.append('<div class="date-cal" />');
+			inner.find('.date-cal').append(date_cal);
 			
 			// Away we go:
 			prepare(); update();

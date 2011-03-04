@@ -1,4 +1,4 @@
-.calendar-overlay {
+div.calendar-overlay {
 	background: #464645;
 	color: #ffffff;
 	margin: -1.60em 0 1.75em 0;
@@ -6,44 +6,51 @@
 	padding: 1.75em 1.75em 0 1.75em;
 }
 
-.calendar-overlay .date-cal {
-	float: left;
+div.calendar-overlay .date-inner {
+	max-width: 50em;
+}
+
+div.calendar-overlay .date-cal {
 	margin: 0 0 1.75em 0;
 	width: 20em;
 }
-.calendar-overlay .date-cal table {
+div.calendar-overlay .date-cal table {
 	border-spacing: 0;
+	table-layout: fixed;
 	width: 20em;
 }
-.calendar-overlay .date-cal table thead td {
+div.calendar-overlay .date-cal table thead td {
+	border: none;
+	background: transparent;
 	padding: 0 0 2px 0;
 	text-align: center;
 	width: 1%;
 }
-.calendar-overlay .date-cal table tbody td {
-	position: relative;
+div.calendar-overlay .date-cal table tbody td {
+	border-width: 0;
+	padding: 0;
 	text-align: center;
 	width: 1%;
 }
-.calendar-overlay .date-cal table tbody td:first-child {
+div.calendar-overlay .date-cal table tbody td:first-child {
 	border-left: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-cal table tbody tr:first-child td {
+div.calendar-overlay .date-cal table tbody tr:first-child td {
 	border-top: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-cal table tbody td:last-child {
+div.calendar-overlay .date-cal table tbody td:last-child {
 	border-right: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-cal table tbody tr:last-child td {
+div.calendar-overlay .date-cal table tbody tr:last-child td {
 	border-bottom: 1px solid #6c6b6a;
 }
-.calendar-overlay .date-cal table tbody td.odd {
+div.calendar-overlay .date-cal table tbody td.odd {
 	background: #434341;
 }
-.calendar-overlay .date-cal table tbody td.even {
+div.calendar-overlay .date-cal table tbody td.even {
 	background: #4a4a48;
 }
-.calendar-overlay .date-cal table tbody td a {
+div.calendar-overlay .date-cal table tbody td a {
 	background: transparent;
 	border-bottom: 1px solid #5b5a59;
 	border-right: 1px solid #5b5a59;
@@ -51,24 +58,24 @@
 	cursor: default;
 	display: block;
 	outline: none;
-	padding: 6px;
+	padding: 6px 0;
 	text-decoration: none;
 }
-.calendar-overlay .date-cal table tbody td.last-month a,
-.calendar-overlay .date-cal table tbody td.next-month a {
+div.calendar-overlay .date-cal table tbody td.last-month a,
+div.calendar-overlay .date-cal table tbody td.next-month a {
 	color: #757472;
 }
-.calendar-overlay .date-cal table tbody td:last-child a {
+div.calendar-overlay .date-cal table tbody td:last-child a {
 	border-right: none;
 }
-.calendar-overlay .date-cal table tbody tr:last-child td a {
+div.calendar-overlay .date-cal table tbody tr:last-child td a {
 	border-bottom: none;
 }
-.calendar-overlay .date-cal table tbody td a:hover {
+div.calendar-overlay .date-cal table tbody td a:hover {
 	background: rgba(0, 0, 0, 0.2);
 }
-.calendar-overlay .date-cal table tbody td a:hover,
-.calendar-overlay .date-cal table tbody td.today a {
+div.calendar-overlay .date-cal table tbody td a:hover,
+div.calendar-overlay .date-cal table tbody td.today a {
 	background: #7d9845;
 	border: 1px solid #d3ff74 !important;
 	color: #ffffff !important;
@@ -78,37 +85,101 @@
 	top: -1px;
 	z-index: 1001;
 }
-.calendar-overlay .date-cal table tbody td a:hover {
+div.calendar-overlay .date-cal table tbody td a:hover {
 	background: #9a9896;
 	border-color: #dad8d5 !important;
 	z-index: 1000;
 }
-.calendar-overlay .date-cal table tbody td:last-child a:hover,
-.calendar-overlay .date-cal table tbody td.today:last-child a {
+div.calendar-overlay .date-cal table tbody td:last-child a:hover,
+div.calendar-overlay .date-cal table tbody td.today:last-child a {
 	margin-right: -2px;
 }
-.calendar-overlay .date-cal table tbody tr:last-child td a:hover,
-.calendar-overlay .date-cal table tbody tr:last-child td.today a {
+div.calendar-overlay .date-cal table tbody tr:last-child td a:hover,
+div.calendar-overlay .date-cal table tbody tr:last-child td.today a {
 	margin-bottom: -2px;
 }
 
-.calendar-overlay .date-month,
-.calendar-overlay .date-time,
-.calendar-overlay .date-input {
-	margin: 0 0 1.75em 22em;
-	min-width: 5em;
+div.calendar-overlay .date-inputs {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	float: right;
+	padding: 0 0 0 22em;
+	width: 100%;
+}
+div.calendar-overlay .date-inputs label {
+	margin-top: 0;
 }
 
-.calendar-overlay .date-input {
-	padding-right: 10px;
-}
-.calendar-overlay .date-input input {
+div.calendar-overlay .date-input input {
 	background: #353534;
 	border: 1px solid #6c6b6a;
 	color: #ffffff;
 	padding: 4px;
 }
-.calendar-overlay .date-input input.error {
+div.calendar-overlay .date-input input.error {
 	background: #a44242;
 	border-color: #ff6666;
+}
+
+@media all and (max-width: 95em) {
+	fieldset.secondary div.calendar-overlay .date-cal,
+	fieldset.secondary div.calendar-overlay .date-cal table {
+		width: 18em;
+	}
+	fieldset.secondary div.calendar-overlay .date-inputs {
+		padding-left: 20em;
+	}
+}
+@media all and (max-width: 85em) {
+	fieldset.secondary div.calendar-overlay .date-cal,
+	fieldset.secondary div.calendar-overlay .date-cal table {
+		width: 16em;
+	}
+	fieldset.secondary div.calendar-overlay .date-inputs {
+		padding-left: 18em;
+	}
+}
+@media all and (max-width: 74em) {
+	fieldset.secondary div.calendar-overlay .date-cal,
+	fieldset.secondary div.calendar-overlay .date-cal table {
+		min-width: 16em;
+		max-width: 20em;
+		width: 100%;
+	}
+	fieldset.secondary div.calendar-overlay .date-inputs {
+		float: none;
+		padding-left: 0;
+	}
+}
+
+@media all and (max-width: 60em) {
+	fieldset.primary div.calendar-overlay .date-cal,
+	fieldset.primary div.calendar-overlay .date-cal table {
+		width: 18em;
+	}
+	fieldset.primary div.calendar-overlay .date-inputs {
+		padding-left: 20em;
+	}
+}
+@media all and (max-width: 55em) {
+	fieldset.primary div.calendar-overlay .date-cal,
+	fieldset.primary div.calendar-overlay .date-cal table {
+		width: 16em;
+	}
+	fieldset.primary div.calendar-overlay .date-inputs {
+		padding-left: 18em;
+	}
+}
+@media all and (max-width: 44em) {
+	fieldset.primary div.calendar-overlay .date-cal,
+	fieldset.primary div.calendar-overlay .date-cal table {
+		min-width: 16em;
+		max-width: 20em;
+		width: 100%;
+	}
+	fieldset.primary div.calendar-overlay .date-inputs {
+		float: none;
+		padding-left: 0;
+	}
 }

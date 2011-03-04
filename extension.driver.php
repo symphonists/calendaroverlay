@@ -8,12 +8,12 @@
 		public function about() {
 			return array(
 				'name'			=> 'Calendar Overlay',
-				'version'		=> '1.0.5',
-				'release-date'	=> '2009-11-30',
+				'version'		=> '1.0.6',
+				'release-date'	=> '2011-03-04',
 				'author'		=> array(
 					'name'			=> 'Rowan Lewis',
-					'website'		=> 'http://pixelcarnage.com/',
-					'email'			=> 'rowan@pixelcarnage.com'
+					'website'		=> 'http://rowanlewis.com/',
+					'email'			=> 'me@rowanlewis.com'
 				),
 				'description'	=> 'Converts date fields into calendars.'
 			);
